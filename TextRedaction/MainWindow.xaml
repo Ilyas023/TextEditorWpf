@@ -1,0 +1,164 @@
+﻿<Window x:Class="TextRedaction.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextRedaction"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Image Height="21" x:Key="CutImages" Source="\Images\Cut-Images.jpg"/>
+        <Image Height="21" x:Key="CopyImages" Source="\Images\Copy-Images.png"/>
+        <Image Height="25" x:Key="PasteImages" Source="\Images\Paste-Images.png"/>
+        <Image Height="21" x:Key="SaveImages" Source="\Images\Save-Images.png"/>
+        <Image Height="21" x:Key="OpenFileImages" Source="\Images\OpenFile-Images.png"/>
+
+        <Image Height="22" x:Key="LeftImages" Source="\Images\Left-Images.png"/>
+        <Image Height="22" x:Key="RightImages" Source="\Images\Right-Images.png"/>
+        <Image Height="22" x:Key="CenterImages" Source="\Images\Center-Images.png"/>
+        <Image Height="22" x:Key="JustifyImages" Source="\Images\Justify-Images.png"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"></RowDefinition>
+            <RowDefinition Height="33"></RowDefinition>
+            <RowDefinition Height="80*"></RowDefinition>
+            <RowDefinition Height="6*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu TextBlock.FontSize="18" Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Header="New"/>
+                <MenuItem Header="Open"/>
+                <MenuItem Header="Save"/>
+                <Separator/>
+                <MenuItem x:Name="exitMenu" Click="exitMenu_Click" Header="Exit"/>
+            </MenuItem>
+            <MenuItem Header="Edit" >
+                <MenuItem Click="btnCut_Click" Header="Cut"/>
+                <MenuItem Click="btnCopy_Click" Header="Copy"/>
+                <MenuItem Click="btnPaste_Click" Header="Paste"/>
+            </MenuItem>
+            <MenuItem Header="Format" >
+                <MenuItem Header="Alignment">
+                    <MenuItem Click="btnLeft_Click" Header="Left"/>
+                    <MenuItem Click="btnCenter_Click" Header="Center"/>
+                    <MenuItem Click="btnRight_Click" Header="Right"/>
+                    <MenuItem Click="btnJustify_Click" Header="Justify"/>
+                </MenuItem>
+                <MenuItem Header="Font" x:Name="fontMenu">
+                    <ComboBox x:Name="FamilyChoiceMenu" ItemsSource="{Binding ElementName=FamilyChoice, Path=ItemsSource}" SelectionChanged="familyChoice_SelectionChanged" Width="140" ></ComboBox> 
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <DockPanel Grid.Row="1">
+            <ToolBarTray>
+                <ToolBar>
+                    <Button Content="{StaticResource SaveImages}"></Button>
+                    <Button Content="{StaticResource OpenFileImages}"></Button>
+                </ToolBar>
+                <ToolBar>
+                    <Button Content="{StaticResource CutImages}" Click="  btnCut_Click" x:Name="BtnCut"></Button>
+                    <Button Content="{StaticResource CopyImages}" Click=" btnCopy_Click" x:Name="BtnCopy"></Button>
+                    <Button Content="{StaticResource PasteImages}" Click="btnPaste_Click" x:Name="BtnPaste"></Button>
+                </ToolBar>
+                <ToolBar>
+                    <ComboBox SelectionChanged="familyChoice_SelectionChanged" x:Name="FamilyChoice" MinWidth="100"/>
+                    
+                    <ComboBox SelectionChanged="sizeChoice_SelectionChanged" x:Name="SizeChoice" MinWidth="80">
+                        <ComboBoxItem Content="8"></ComboBoxItem>
+                        <ComboBoxItem Content="9"></ComboBoxItem>
+                        <ComboBoxItem Content="10"></ComboBoxItem>
+                        <ComboBoxItem Content="11"></ComboBoxItem>
+                        <ComboBoxItem Content="12"></ComboBoxItem>
+                        <ComboBoxItem Content="14"></ComboBoxItem>
+                        <ComboBoxItem Content="16"></ComboBoxItem>
+                        <ComboBoxItem Content="20"></ComboBoxItem>
+                        <ComboBoxItem Content="24"></ComboBoxItem>
+                        <ComboBoxItem Content="28"></ComboBoxItem>
+                        <ComboBoxItem Content="32"></ComboBoxItem>
+                        <ComboBoxItem Content="36"></ComboBoxItem>
+                        <ComboBoxItem Content="48"></ComboBoxItem>
+                    </ComboBox>
+                    <Button Click="btnBold_Click" x:Name="btnBold" MinWidth="25" FontSize="14" >
+                        <TextBlock FontWeight="Bold">B</TextBlock>
+                    </Button>
+                    <Button FontStyle="Italic" Click="btnItaly_Click" x:Name="btnItaly" MinWidth="25" FontSize="14" >
+                        <TextBlock FontStyle="Italic" FontWeight="Bold">I</TextBlock>
+                    </Button>
+                    <Button Click="btnUnderline_Click" x:Name="btnUnderline" MinWidth="25" FontSize="14" >
+                        <TextBlock TextDecorations="Underline" FontWeight="Bold">U</TextBlock>
+                    </Button>
+                </ToolBar>
+                <ToolBar>
+                    <Button Content="{StaticResource LeftImages}" Click="btnLeft_Click" x:Name="btnLeft" MinWidth="25" FontSize="14"/>
+                    <Button Content="{StaticResource CenterImages}" Click="btnCenter_Click" x:Name="btnCenter" MinWidth="25" FontSize="14"/>
+                    <Button Content="{StaticResource RightImages}" Click="btnRight_Click" x:Name="btnRight" MinWidth="25" FontSize="14"/>
+                    <Button Content="{StaticResource JustifyImages}" Click="btnJustify_Click" x:Name="btnJustify" MinWidth="25" FontSize="14"/>
+                </ToolBar>
+            </ToolBarTray>
+            
+            <ToolBarTray>
+                <ToolBar MinHeight="30" MinWidth="130">
+                    <TextBlock VerticalAlignment="Center" Text="Color: " FontSize="15"/>
+                    <ComboBox x:Name="backgroundChanged">
+                        <ComboBoxItem Name="a0a0a0" IsSelected="True">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="15" Height="15" Background="black"/>
+                                <TextBlock Text="Black" FontSize="15"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Name="Blue">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="15" Height="15" Background="Blue"/>
+                                <TextBlock Text=" Blue" FontSize="15"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Name="Green">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="15" Height="15" Background="Green"/>
+                                <TextBlock Text=" Green" FontSize="15"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Name="Orange">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="15" Height="15" Background="Orange"/>
+                                <TextBlock Text=" Orange" FontSize="15"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Name="Purple">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="15" Height="15" Background="Purple"/>
+                                <TextBlock Text=" Purple" FontSize="15"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Name="Red">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="15" Height="15" Background="Red"/>
+                                <TextBlock Text=" Red" FontSize="15"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Name="Yellow">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="15" Height="15" Background="Yellow"/>
+                                <TextBlock Text=" Yellow" FontSize="15"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                    </ComboBox>
+                </ToolBar>
+            </ToolBarTray>
+        </DockPanel>
+        
+        <DockPanel Grid.Row="2">
+            <RichTextBox SelectionChanged="TextEl_SelectionChanged" HorizontalAlignment="Right" x:Name="TextEl" Foreground="{Binding ElementName=backgroundChanged, Path=SelectedItem.Name}" ></RichTextBox>
+        </DockPanel>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="3">
+            <TextBlock Text="COL: " MinHeight="27"/>
+            <TextBlock x:Name="ColTxt"  MinWidth="75"/>
+            
+            <TextBlock Text="ROW: " MinHeight="27"/>
+            <TextBlock x:Name="RowTxt" Text="" MinWidth="75"/>
+        </StackPanel>
+    </Grid>
+</Window>
+    

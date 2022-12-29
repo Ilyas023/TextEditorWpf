@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\Center-Images.png" />
+    <None Remove="Images\Copy-Images.png" />
+    <None Remove="Images\Cut-Images.jpg" />
+    <None Remove="Images\Justify-Images.png" />
+    <None Remove="Images\Left-Images.png" />
+    <None Remove="Images\OpenFile-Images.png" />
+    <None Remove="Images\Paste-Images.png" />
+    <None Remove="Images\Right-Images.png" />
+    <None Remove="Images\Save-Images.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Center-Images.png" />
+    <Resource Include="Images\Copy-Images.png" />
+    <Resource Include="Images\Cut-Images.jpg" />
+    <Resource Include="Images\Justify-Images.png" />
+    <Resource Include="Images\Left-Images.png" />
+    <Resource Include="Images\OpenFile-Images.png" />
+    <Resource Include="Images\Paste-Images.png" />
+    <Resource Include="Images\Right-Images.png" />
+    <Resource Include="Images\Save-Images.png" />
+  </ItemGroup>
+
+</Project>
